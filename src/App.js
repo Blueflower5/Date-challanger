@@ -9,34 +9,33 @@ export default function App() {
   );
 }
 function Counter() {
-  const [step, setStep] = useState(0);
   const [count, setCount] = useState(0);
-  function stepNext() {
-    setStep((y) => step * y);
+  const [step, setStep] = useState(1);
+  function addCount() {
+    setCount((c) => c + step);
   }
-
-  function countNext() {
-    setCount((x) => count + 1);
+  function minesCount() {
+    if (count > 0) setCount((c) => c - step);
   }
-  function countPervious() {
-    setCount((x) => count - 1);
+  function addStep() {
+    setStep((s) => s + 1);
+  }
+  function minesStep() {
+    setStep((s) => s - 1);
   }
   return (
-    <>
+    <div>
       <div>
-        <button>-</button>
-        Step:
-        <button>+</button>
+        <button onClick={minesStep}>-</button>
+        Step:{step}
+        <button onClick={addStep}>+</button>
       </div>
       <div>
-        <button onClick={countPervious}>-</button>
+        <button onClick={minesCount}>-</button>
         Count:{count}
-        <button onClick={countNext}>+</button>
+        <button onClick={addCount}>+</button>
       </div>
-      <div className={count < 0 ? "hidden" : ""}>{count} Days from now</div>
-      <div className={count > -1 ? "hidden" : ""}>
-        {Math.abs(count)} Days before now
-      </div>
-    </>
+      <div>{count}days from today.</div>
+    </div>
   );
 }
